@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package postman.email;
+option go_package = "/proto/email";
+
+enum EmailStatus {
+    EMAIL_STATUS_CREATED = 0;
+    EMAIL_STATUS_SENT = 1;
+}
+
+message Email {
+    string subject = 1;
+    string from_email = 2;
+    string from_name = 3;
+    string to_email = 4;
+    string to_name = 5;
+    string reply_to = 6;
+    string body = 7;
+}
+
+message CreateEmailResponse {
+    string id = 1;
+    EmailStatus status = 2;
+    string created_at = 3;
+}
+
+service EmailService {
+    rpc CreateEmail(Email) returns (CreateEmailResponse) {};
+}
